@@ -1,37 +1,55 @@
-/* eslint-disable react/button-has-type */
+import {
+  AspectRatio,
+  Box,
+  Center,
+  Container,
+  Image,
+  Overlay,
+} from '@mantine/core';
+import { Link } from 'react-router-dom';
+import { Navigation } from '../components/Navigation';
+
 export default function HomePage() {
-  const openInNewWindow = () => {
-    window.electron.ipcRenderer.createWindow({
-      width: 800,
-      height: 600,
-      title: 'Home Page Window',
-    });
-  };
-
-  const openInModalWindow = () => {
-    window.electron.ipcRenderer.createModalWindow({
-      width: 500,
-      height: 400,
-      title: 'Home Modal',
-    });
-  };
-
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Home Page</h1>
-      <div className="space-x-4">
-        <button
-          onClick={openInNewWindow}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-        >
-          Open in New Window
-        </button>
-        <button
-          onClick={openInModalWindow}
-          className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
-        >
-          Open as Modal
-        </button>
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/profile">Prodile</Link>
+      </nav>
+      <div>
+        <Box pos="relative" data-tauri-drag-region>
+          <AspectRatio
+            ratio={800 / 200}
+            style={{
+              pointerEvents: 'none',
+            }}
+          >
+            <Image src="/assets/banner.jpg" alt="Banner" />
+            <Overlay color="#000" backgroundOpacity={0.35} blur={5} />
+          </AspectRatio>
+
+          <Center
+            pos="absolute"
+            w="100%"
+            style={{
+              zIndex: 9999,
+            }}
+            bottom={-10}
+          >
+            <Image
+              src="/assets/logo.png"
+              alt="Logo"
+              width={120}
+              height={80}
+              mx="auto"
+            />
+          </Center>
+        </Box>
+
+        <Container mt={50}>
+          <Navigation />
+        </Container>
       </div>
     </div>
   );

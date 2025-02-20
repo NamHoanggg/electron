@@ -38,9 +38,7 @@ const electronHandler = {
     createWindow(config: WindowConfig) {
       ipcRenderer.send('create-new-window', config);
     },
-    createModalWindow(config: WindowConfig) {
-      ipcRenderer.send('create-modal-window', config);
-    },
+
   },
 };
 
