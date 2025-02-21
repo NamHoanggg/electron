@@ -1,22 +1,15 @@
+import React from 'react';
 import { Button } from '@mantine/core';
 import type { NavigationItemType } from './data';
+import { openInNewWindow } from '../../utilities/window';
 
 export const NavigationItem: React.FC<NavigationItemType> = ({
   router,
   Icon,
   label,
 }) => {
-  const openInNewWindow = () => {
-    window.electron.ipcRenderer.createWindow({
-      width: 800,
-      height: 600,
-      title: 'Window',
-      route: `/${router}`,
-    });
-  };
-
   return (
-    <Button leftSection={<Icon />} onClick={openInNewWindow}>
+    <Button leftSection={<Icon />} onClick={() => openInNewWindow(router)}>
       {label}
     </Button>
   );
